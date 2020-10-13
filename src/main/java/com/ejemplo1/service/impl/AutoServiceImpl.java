@@ -8,7 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ejemplo1.dto.AutoDTO;
+import com.ejemplo1.dto.request.AutoReq;
+import com.ejemplo1.dto.respond.AutoDTO;
 import com.ejemplo1.mapper.AutoMapper;
 import com.ejemplo1.repository.AutoRepository;
 import com.ejemplo1.repository.entities.AutoModel;
@@ -20,7 +21,7 @@ public class AutoServiceImpl implements AutoService {
 	@Autowired
 	private AutoRepository repo;
 
-	public AutoDTO createAuto(AutoDTO autoReq) {
+	public AutoDTO createAuto(AutoReq autoReq) {
 		AutoModel model = new AutoModel();
 		BeanUtils.copyProperties(autoReq, model);
 		model = repo.save(model);

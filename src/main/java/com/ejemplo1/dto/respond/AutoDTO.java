@@ -1,4 +1,4 @@
-package com.ejemplo1.dto;
+package com.ejemplo1.dto.respond;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class AutoDTO {
 
+	private Integer id;
 	private String marca;
 	private String modelo;
 	private String color;

@@ -1,7 +1,6 @@
 package com.ejemplo1.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ejemplo1.dto.request.AutoReq;
 import com.ejemplo1.dto.respond.AutoDTO;
+import com.ejemplo1.exception.ResourceNotFoundException;
 import com.ejemplo1.mapper.AutoMapper;
 import com.ejemplo1.repository.AutoRepository;
 import com.ejemplo1.repository.entities.AutoModel;
@@ -37,11 +37,11 @@ public class AutoServiceImpl implements AutoService {
 	}
 
 	public AutoDTO findById(Integer id) {
-		Optional<AutoModel> opt = repo.findById(id);
+		AutoModel opt = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));
 
 		// AutoModel model = opt.orElse(null) // Opción 1
-		AutoModel model = opt.orElse(new AutoModel());// Opción 2
+		//AutoModel model = opt.orElse(new AutoModel());// Opción 2
 
-		return AutoMapper.MAPPER.entityToDTO(model);
+		return AutoMapper.MAPPER.entityToDTO(opt);
 	}
 }

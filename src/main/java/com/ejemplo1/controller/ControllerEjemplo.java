@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ejemplo1.dto.request.AutoReq;
 import com.ejemplo1.dto.respond.AutoDTO;
+import com.ejemplo1.exception.ResourceNotFoundException;
 import com.ejemplo1.service.AutoService;
 
 @RestController
@@ -32,6 +33,9 @@ public class ControllerEjemplo {
 	@GetMapping(value = "/findAll")
 	public ResponseEntity<List<AutoDTO>> findAllAutos() {
 		List<AutoDTO> respond = autoService.findAllAutos();
+		if(respond.isEmpty()) {
+		      throw new ResourceNotFoundException("Not found data");
+		}
 		return new ResponseEntity<>(respond, HttpStatus.OK);
 	}
 	
